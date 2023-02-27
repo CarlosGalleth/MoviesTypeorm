@@ -1,7 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { nullable } from "zod";
 
-@Entity("movies")
+@Entity("Movie")
 export class Movie {
   @PrimaryGeneratedColumn("increment")
   id: number;
@@ -18,3 +17,4 @@ export class Movie {
   @Column()
   price: number;
 }
+

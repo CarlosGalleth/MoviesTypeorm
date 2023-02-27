@@ -16,7 +16,7 @@ const dataSourceConfig = (): DataSourceOptions => {
   if (nodeEnv === "test") {
     return {
       type: "sqlite",
-      database: ":memory",
+      database: ":memory:",
       synchronize: true,
       entities: [entitiesPath],
     };
@@ -25,7 +25,7 @@ const dataSourceConfig = (): DataSourceOptions => {
   return {
     type: "postgres",
     url: dbURL,
-    synchronize: true,
+    synchronize: false,
     logging: true,
     migrations: [migrationsPath],
     entities: [entitiesPath],

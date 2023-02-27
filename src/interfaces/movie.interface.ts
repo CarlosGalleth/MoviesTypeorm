@@ -1,4 +1,6 @@
+import { Repository } from "typeorm";
 import { z } from "zod";
+import { Movie } from "../entities";
 import {
   createMovieSchema,
   movieUpdateSchema,
@@ -9,4 +11,5 @@ import {
 export type IMovie = z.infer<typeof createMovieSchema>;
 export type IMovieReturn = z.infer<typeof returnMovieSchema>;
 export type IMoviesReturn = z.infer<typeof returnMultipleMovieSchema>;
-export type IMovieUpdate = z.infer<typeof movieUpdateSchema>
+export type IMovieUpdate = z.infer<typeof movieUpdateSchema>;
+export interface iMovieRepo extends Repository<Movie> {}

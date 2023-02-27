@@ -1,25 +1,31 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../data-source";
 import { Movie } from "../entities/movie.entity";
-import { IMovieReturn, IMovieUpdate } from "../interfaces/movie.interface";
+import { AppError } from "../errors";
+import { IMoviePartial, IMovieReturn } from "../interfaces/movie.interface";
 import { returnMovieSchema } from "../schemas/movie.schemas";
 
-export const updateMovieService = async (movieData: any, movieId: number): Promise<IMovieReturn> => {
-    const movieRepository: Repository<Movie> = AppDataSource.getRepository(Movie);
-    const oldMovieData = await movieRepository.findOne({
-        where: {
-            id: movieId
-        }
-    })
+export const updateMovieService = async (
+  movieData: IMoviePartial,
+  movieId: number
+): Promise<IMovieReturn> => {
+  const movieRepository: Repository<Movie> = AppDataSource.getRepository(Movie);
+  const oldMovieData = await movieRepository.findOneBy({
+    id: movieId,
+  });
 
-    const movie = movieRepository.create({
-        ...oldMovieData,
-        ...movieData
-    })
+  if (oldMovieData?.name === movieData.name) {
+    throw new AppError("Movie already exists.", 409);
+  }
 
-    await movieRepository.save(movie)
+  const movie = movieRepository.create({
+    ...oldMovieData,
+    ...movieData,
+  });
 
-    const updatedMovie = returnMovieSchema.parse(movie)
+  await movieRepository.save(movie);
 
-    return updatedMovie
-}
+  const updatedMovie = returnMovieSchema.parse(movie);
+
+  return updatedMovie;
+};

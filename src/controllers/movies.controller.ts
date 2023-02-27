@@ -29,7 +29,7 @@ export const updateMovieController = async (
 ) => {
   const movieId: number = Number(request.params.id);
   const updatedMovie = await updateMovieService(request.body, movieId);
-  return response.json(updatedMovie);
+  return response.status(200).json(updatedMovie);
 };
 
 export const deleteMovieController = async (

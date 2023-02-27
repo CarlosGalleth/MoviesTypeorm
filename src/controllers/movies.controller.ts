@@ -19,7 +19,8 @@ export const listMovieController = async (
   request: Request,
   response: Response
 ) => {
-  const movies = await listMoviesService();
+  const { page, perPage, a } = request.query;
+  const movies = await listMoviesService(page, perPage);
   return response.json(movies);
 };
 

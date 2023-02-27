@@ -13,7 +13,7 @@ export const ensureNameExistsMiddleware = async (request: Request, response: Res
   });
 
   if (movie) {
-    throw new AppError("Movie already exists", 409);
+    throw new AppError("Movie already exists.", 409);
   }
 
   return next()

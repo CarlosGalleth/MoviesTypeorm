@@ -7,5 +7,4 @@ const app: Application = express();
 app.use(express.json());
 app.use("/movies", movieRoutes);
 app.use(handleErrors);
-
-export default app
+export default app;

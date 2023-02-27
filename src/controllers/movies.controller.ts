@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { request } from "http";
 import { IMovie } from "../interfaces/movie.interface";
 import { createMovieService } from "../services/createMovie.service";
 import { deleteMovieService } from "../services/deleteMovie.service";

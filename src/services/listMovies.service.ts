@@ -44,7 +44,7 @@ export const listMoviesService = async (page: any, perPage: any) => {
   const listMoviesResult = {
     prevPage: prevPage,
     nextPage: nextPage,
-    count: movies.length,
+    count: findAllMovies.length,
     data: movies,
   };
 
